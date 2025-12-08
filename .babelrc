@@ -1,0 +1,4 @@
+/* "Bảng điều khiển" (Configuration File) của Babel. File này sẽ dịch code  */
+{
+  "presets": ["@babel/preset-env"]
+}

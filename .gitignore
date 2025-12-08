@@ -1,0 +1,4 @@
+# Liệt kê những file hoặc thư mục mà Git cần "làm ngơ", không được theo dõi và không được đẩy (push) lên Github/Gitlab.
+.env
+node_modules
+node_modules/*
