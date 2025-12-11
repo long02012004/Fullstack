@@ -38,8 +38,15 @@ const createNewUser = async (email, password, username) => {
 };
 
 const getListUser = async () => {
-  const [results] = await connection.execute("SELECT * FROM users");
-  console.log("Danh sách user:", results);
+  try {
+    const [results] = await connection.execute("SELECT * FROM users");
+
+    return results;
+  } catch (error) {
+    console.error("Lỗi khi lấy danh sách người dùng:", error);
+
+    return [];
+  }
 };
 
 export default { createNewUser, getListUser };

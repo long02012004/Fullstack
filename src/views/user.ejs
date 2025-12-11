@@ -17,13 +17,17 @@
     ></script>
   </head>
   <body>
-    <div class="user-infor-container w-75 mx-auto">
-      <div class="container">
-        <form method="POST" action="/users/create-user">
-          <!-- container là class của bootstrap để tạo khoảng cách padding cho form -->
-          <div class="row ">
+    <div class="container">
+      <!-- container là class của bootstrap để tạo khoảng cách padding cho form -->
+      <div class="row">
+        <div class="user-infor-container w-75 mx-auto">
+          <form
+            method="POST"
+            action="/users/create-user"
+            class="mx-auto back p-4 d-flex flex-wrap flex-column align-items-center"
+          >
             <h3 class="title mt-5 text-center">Create New User</h3>
-            <div class="mb-3 col-6 mt-3 ">
+            <div class="mb-3 col-6 mt-3">
               <label for="email" class="form-label">Email address</label>
               <input
                 type="email"
@@ -55,11 +59,38 @@
                 name="username"
               />
             </div>
+            <div class="col-6">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+          <div class="table-user mt-3">
+            <h3>Table users:</h3>
+            <table class="table table-hover table-bordered mt-3">
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">EMAIL</th>
+                  <th scope="col">USERNAME</th>
+                  <th scope="col">ACTION</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% listUser.forEach(function(user, index) { %>
+                <tr>
+                  <td><%= index+1 %></td>
+                  <td><%= user.email %></td>
+                  <td><%= user.username %></td>
+                  <td>
+                    <button type="button" class="btn btn-danger">Delete</button>
+                    <button type="button" class="btn btn-warning">Edit</button>
+                    <button type="button" class="btn btn-primary">View</button>
+                  </td>
+                </tr>
+                <% }); %>
+              </tbody>
+            </table>
           </div>
-          <div class="col-12">
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </div>
-        </form>
+        </div>
       </div>
     </div>
   </body>
