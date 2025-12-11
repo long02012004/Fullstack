@@ -17,47 +17,50 @@
     ></script>
   </head>
   <body>
-    <div class="user-infor-container">
-      <form class="container" method="POST" action="/users/create-user">
-        <!-- container là class của bootstrap để tạo khoảng cách padding cho form -->
-        <div class="row">
-          <div class="mb-3 col-6 mt-3">
-            <label for="email" class="form-label">Email address</label>
-            <input
-              type="email"
-              class="form-control"
-              id="email"
-              name="email"
-              required
-            />
+    <div class="user-infor-container w-75 mx-auto">
+      <div class="container">
+        <form method="POST" action="/users/create-user">
+          <!-- container là class của bootstrap để tạo khoảng cách padding cho form -->
+          <div class="row ">
+            <h3 class="title mt-5 text-center">Create New User</h3>
+            <div class="mb-3 col-6 mt-3 ">
+              <label for="email" class="form-label">Email address</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                name="email"
+                required
+              />
+            </div>
+            <div class="col-6"></div>
+            <div class="mb-3 col-6">
+              <label for="password" class="form-label">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                name="password"
+                required
+              />
+            </div>
+            <div class="col-6"></div>
+            <div class="mb-3 col-6">
+              <label for="username" class="form-label">user name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="username"
+                required
+                name="username"
+              />
+            </div>
           </div>
-          <div class="col-6"></div>
-          <div class="mb-3 col-6">
-            <label for="password" class="form-label">Password</label>
-            <input
-              type="password"
-              class="form-control"
-              id="password"
-              name="password"
-              required
-            />
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary">Submit</button>
           </div>
-          <div class="col-6"></div>
-          <div class="mb-3 col-6">
-            <label for="username" class="form-label">user name</label>
-            <input
-              type="text"
-              class="form-control"
-              id="username"
-              required
-              name="username"
-            />
-          </div>
-        </div>
-        <div class="col-12">
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   </body>
 </html>
