@@ -1,6 +1,6 @@
 // Tạo server với ExpressJS
 import express from "express";
-import configViewEngine from "./configs/viewEngine.js";
+import configViewEngine from "./config/viewEngine.js";
 import initWebRoutes from "./routes/web.js";
 
 import bodyParser from "body-parser"; //
@@ -11,10 +11,9 @@ const app = express();
 // Cấu hình giao diện
 configViewEngine(app);
 
-
 // parse application/x-www-form-urlencoded
 // dùng để lấy dữ liệu từ form gửi lên
-app.use(bodyParser.urlencoded())
+app.use(bodyParser.urlencoded());
 // parse application/json
 // dùng để parse dữ liệu dạng json
 app.use(bodyParser.json());
