@@ -59,4 +59,35 @@ const deleteUserById = async (id) => {
     throw error;
   }
 };
-export default { createNewUser, getListUser, deleteUserById };
+// Lấy thông tin người dùng theo ID
+const getUserById = async (id) => {
+  try {
+    const [results] = await connection.execute(
+      "SELECT* FROM users WHERE id=?",
+      [id]
+    );
+    return results[0] || null;
+  } catch (error) {
+    console.error("Lỗi khi cập nhật người dùng:", error);
+    throw error;
+  }
+};
+const updateUserById = async (email, username, id) => {
+  try {
+    const [results] = await connection.execute(
+      "UPDATE users SET email=?, username=? WHERE id=?",
+      [email, username, id]
+    );
+    return results[0] || null;
+  } catch (error) {
+    console.error("Lỗi khi cập nhật người dùng:", error);
+    throw error;
+  }
+};
+export default {
+  createNewUser,
+  getListUser,
+  deleteUserById,
+  getUserById,
+  updateUserById,
+};
