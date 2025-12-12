@@ -17,8 +17,16 @@ const handleCreateNewUser = async (req, res) => {
   let email = req.body.email;
   await userService.createNewUser(email, password, username);
 
-  return res.send("Tạo thành công user");
-  console.log("Kết quả so sánh mật khẩu:", check);
+  return res.redirect("/user");
+};
+const handleDeleteUser = async (req, res) => {
+  const listUser = await userService.deleteUserById(req.params.id);
+  return res.redirect("/user");
 };
 
-export { handleHelloWorld, handleUserPage, handleCreateNewUser };
+export {
+  handleHelloWorld,
+  handleUserPage,
+  handleCreateNewUser,
+  handleDeleteUser,
+};

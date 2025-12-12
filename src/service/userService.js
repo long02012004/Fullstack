@@ -49,4 +49,14 @@ const getListUser = async () => {
   }
 };
 
-export default { createNewUser, getListUser };
+const deleteUserById = async (id) => {
+  try {
+    const [results] = await connection.execute("DELETE FROM users WHERE id=?", [
+      id,
+    ]);
+  } catch (error) {
+    console.error("Lỗi khi xóa người dùng:", error);
+    throw error;
+  }
+};
+export default { createNewUser, getListUser, deleteUserById };
