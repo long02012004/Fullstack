@@ -25,7 +25,7 @@ const createNewUser = async (email, password, username) => {
     const hashedPassword = await hashedUserPassword(password);
 
     const [results] = await connection.execute(
-      "INSERT INTO users (username, email, password) VALUES (?, ?, ?)",
+      "INSERT INTO Users (username, email, password) VALUES (?, ?, ?)",
       [username, email, hashedPassword]
     );
 
@@ -39,7 +39,7 @@ const createNewUser = async (email, password, username) => {
 
 const getListUser = async () => {
   try {
-    const [results] = await connection.execute("SELECT * FROM users");
+    const [results] = await connection.execute("SELECT * FROM Users");
 
     return results;
   } catch (error) {
@@ -51,7 +51,7 @@ const getListUser = async () => {
 
 const deleteUserById = async (id) => {
   try {
-    const [results] = await connection.execute("DELETE FROM users WHERE id=?", [
+    const [results] = await connection.execute("DELETE FROM Users WHERE id=?", [
       id,
     ]);
   } catch (error) {
@@ -63,7 +63,7 @@ const deleteUserById = async (id) => {
 const getUserById = async (id) => {
   try {
     const [results] = await connection.execute(
-      "SELECT* FROM users WHERE id=?",
+      "SELECT * FROM Users WHERE id=?",
       [id]
     );
     return results[0] || null;
@@ -75,7 +75,7 @@ const getUserById = async (id) => {
 const updateUserById = async (email, username, id) => {
   try {
     const [results] = await connection.execute(
-      "UPDATE users SET email=?, username=? WHERE id=?",
+      "UPDATE Users SET email=?, username=? WHERE id=?",
       [email, username, id]
     );
     return results[0] || null;
