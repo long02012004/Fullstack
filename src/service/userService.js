@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt";
 import mysql from "mysql2/promise";
+import db from "../models/index.js";
 
 // Tạo connection pool
 const connection = mysql.createPool({
@@ -21,16 +22,14 @@ const hashedUserPassword = async (userPassword) => {
 
 // Hàm tạo người dùng mới
 const createNewUser = async (email, password, username) => {
+  const hashedPassword = await hashedUserPassword(password);
+
   try {
-    const hashedPassword = await hashedUserPassword(password);
-
-    const [results] = await connection.execute(
-      "INSERT INTO Users (username, email, password) VALUES (?, ?, ?)",
-      [username, email, hashedPassword]
-    );
-
-    console.log("Tạo user thành công:", results);
-    return results; // trả dữ liệu cho hàm gọi nó xử lý
+    await db.User.create({
+      email: email,
+      password: hashedPassword,
+      username: username,
+    });
   } catch (error) {
     console.log("Lỗi tạo user:", error);
     throw error;
@@ -38,6 +37,9 @@ const createNewUser = async (email, password, username) => {
 };
 
 const getListUser = async () => {
+  /* let users = [];
+  users = await db.User.findAll();
+  return users; */
   try {
     const [results] = await connection.execute("SELECT * FROM Users");
 
