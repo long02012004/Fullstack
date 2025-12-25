@@ -24,10 +24,13 @@ const handleDeleteUser = async (req, res) => {
 };
 const getUpdateUserPage = async (req, res) => {
   let id = req.params.id;
-  let userData = await userService.getUserById(id);
-  if (!userData) {
+  let user = await userService.getUserById(id);
+  let userData = {};
+  userData = user;
+
+  /* if (!userData) {
     return res.send("User not found");
-  }
+  } */
   return res.render("update-user.ejs", { userData });
 };
 const handleUpdateUser = async (req, res) => {

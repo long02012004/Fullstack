@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import mysql from "mysql2/promise";
 import db from "../models/index.js";
+import { where } from "sequelize";
 
 // Tạo connection pool
 const connection = mysql.createPool({
@@ -37,10 +38,13 @@ const createNewUser = async (email, password, username) => {
 };
 
 const getListUser = async () => {
-  /* let users = [];
+  // viết sequelize
+  let users = [];
   users = await db.User.findAll();
-  return users; */
-  try {
+  return users;
+
+  /* viết truyền thống 
+ try {
     const [results] = await connection.execute("SELECT * FROM Users");
 
     return results;
@@ -48,22 +52,30 @@ const getListUser = async () => {
     console.error("Lỗi khi lấy danh sách người dùng:", error);
 
     return [];
-  }
+  } */
 };
 
-const deleteUserById = async (id) => {
-  try {
+const deleteUserById = async (userID) => {
+  await db.User.destroy({
+    where: { id: userID },
+  });
+  /* try {
     const [results] = await connection.execute("DELETE FROM Users WHERE id=?", [
-      id,
+      userID,
     ]);
   } catch (error) {
     console.error("Lỗi khi xóa người dùng:", error);
     throw error;
-  }
+  } */
 };
 // Lấy thông tin người dùng theo ID
 const getUserById = async (id) => {
-  try {
+  let user = {};
+  user = await db.User.findOne({
+    where: { id: id },
+  });
+  return user.get({ plain: true });
+  /*  try {
     const [results] = await connection.execute(
       "SELECT * FROM Users WHERE id=?",
       [id]
@@ -72,10 +84,18 @@ const getUserById = async (id) => {
   } catch (error) {
     console.error("Lỗi khi cập nhật người dùng:", error);
     throw error;
-  }
+  } */
 };
 const updateUserById = async (email, username, id) => {
-  try {
+  await db.User.update(
+    { email: email, username: username },
+    {
+      where: {
+        id: id,
+      },
+    }
+  );
+  /*   try {
     const [results] = await connection.execute(
       "UPDATE Users SET email=?, username=? WHERE id=?",
       [email, username, id]
@@ -84,7 +104,7 @@ const updateUserById = async (email, username, id) => {
   } catch (error) {
     console.error("Lỗi khi cập nhật người dùng:", error);
     throw error;
-  }
+  } */
 };
 export default {
   createNewUser,
