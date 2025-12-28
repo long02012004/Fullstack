@@ -2,6 +2,7 @@ import bcrypt from "bcrypt";
 import mysql from "mysql2/promise";
 import db from "../models/index.js";
 import { where } from "sequelize";
+import { raw } from "body-parser";
 
 // Tạo connection pool
 const connection = mysql.createPool({
@@ -38,6 +39,14 @@ const createNewUser = async (email, password, username) => {
 };
 
 const getListUser = async () => {
+  let newUser = await db.User.findOne({
+    where: { id: 1 },
+    include: { model: db.Group },
+    raw: true,
+    nest: true,
+  });
+  console.log("newUser:", newUser);
+
   // viết sequelize
   let users = [];
   users = await db.User.findAll();

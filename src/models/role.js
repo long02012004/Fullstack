@@ -9,6 +9,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      // Role quan hệ với Group nhiều role - nhiều group
+      // thông qua bảng trung gian GroupRole
+      Role.belongsToMany(models.Group, {
+        through: models.GroupRole,
+      });
     }
   }
   Role.init(

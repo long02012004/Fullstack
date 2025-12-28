@@ -9,6 +9,15 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      // Group quan hệ với User 1 group - nhiều user
+      Group.hasMany(models.User, {
+        foreignKey: "groupId",
+      });
+      // Group quan hệ với Role nhiều group - nhiều role
+      // thông qua bảng trung gian GroupRole
+      Group.belongsToMany(models.Role, {
+        through: models.GroupRole,
+      });
     }
   }
   Group.init(
@@ -19,6 +28,8 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "Group",
+      tableName: "Group", // ✅ TRÙNG DB
+      freezeTableName: true, // ✅ KHÔNG TỰ ĐỔI SỐ NHIỀU
     }
   );
   return Group;

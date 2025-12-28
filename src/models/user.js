@@ -9,6 +9,16 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      // User quan hệ với Group 1user - 1 group
+      User.belongsTo(models.Group, {
+        foreignKey: "groupId",
+      });
+
+      // User quan hệ với Project nhiều user - nhiều project
+      // thông qua bảng trung gian ProjectUser
+      User.belongsToMany(models.Project, {
+        through: models.ProjectUser,
+      });
     }
   }
   User.init(
@@ -24,6 +34,8 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "User",
+      tableName: "User",
+      freezeTableName: true, 
     }
   );
   return User;

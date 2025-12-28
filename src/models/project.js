@@ -9,6 +9,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      // Project quan hệ với User nhiều project - nhiều user
+      // thông qua bảng trung gian ProjectUser
+      Project.belongsToMany(models.User, {
+        through: models.ProjectUser,
+      });
     }
   }
   Project.init(
