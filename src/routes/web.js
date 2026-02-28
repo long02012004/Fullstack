@@ -6,8 +6,9 @@ import {
   handleCreateNewUser,
   handleDeleteUser,
   getUpdateUserPage,
-  handleUpdateUser
+  handleUpdateUser,
 } from "../controller/homeController.js";
+import apiController from "../controller/apiController.js";
 const router = express.Router();
 const initWebRoutes = (app) => {
   router.get("/", handleHelloWorld);
@@ -16,6 +17,9 @@ const initWebRoutes = (app) => {
   router.post("/delete-user/:id", handleDeleteUser);
   router.get("/update-user/:id", getUpdateUserPage);
   router.post("/users/update-user", handleUpdateUser);
+
+  //rest api
+  router.get("/api/test-api", apiController.testApi);
   return app.use("/", router);
 };
 export default initWebRoutes;
